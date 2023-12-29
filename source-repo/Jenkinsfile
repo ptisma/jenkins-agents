@@ -1,6 +1,8 @@
 pipeline {
     agent any
 
+    tools { go '1.19' }
+
     stages {
         stage('Checkout') {
             steps {
@@ -19,11 +21,9 @@ pipeline {
         stage('Build') {
             steps {
                 dir('source-repo/') {
-                // Set up Go environment variables
-                    withEnv(["GOPATH=${workspace}"]) {
-                        // Build the Go program
-                        sh 'go build -o hello-world main.go'
-                }
+                    // Build the Go program
+                    sh 'go build -o hello-world main.go'
+                
             }
         }
         }
