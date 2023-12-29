@@ -1,0 +1,53 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the source code from the repository
+                git branch: 'main', url: 'https://github.com/ptisma/jenkins-agents.git', dir: 'source-repo'
+            }
+        }
+
+        stage('List') {
+            steps {
+                // List contents of the workspace folder
+                sh 'ls -l'
+            }
+        }
+    
+        stage('Build') {
+            steps {
+                // Set up Go environment variables
+                withEnv(["GOPATH=${workspace}"]) {
+                    // Build the Go program
+                    sh 'go build -o hello-world main.go'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Run Go tests
+                sh 'go test ./...'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // This stage is an example and might not apply to this project
+                // It's common to deploy compiled binaries or artifacts to specific locations
+                echo 'Deployment step - Not implemented in this example'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline succeeded - Hello, World! Go program built successfully.'
+        }
+        failure {
+            echo 'Pipeline failed - There might be issues with building or testing the Go program.'
+        }
+    }
+}
