@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the source code from the repository
-                git branch: 'main', url: 'https://github.com/ptisma/jenkins-agents.git', dir: 'source-repo'
+                git branch: 'main', url: 'https://github.com/ptisma/jenkins-agents.git'
             }
         }
 
