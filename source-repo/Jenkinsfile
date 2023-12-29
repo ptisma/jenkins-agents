@@ -18,26 +18,34 @@ pipeline {
     
         stage('Build') {
             steps {
+                dir('source-repo/') {
                 // Set up Go environment variables
-                withEnv(["GOPATH=${workspace}"]) {
-                    // Build the Go program
-                    sh 'go build -o hello-world main.go'
+                    withEnv(["GOPATH=${workspace}"]) {
+                        // Build the Go program
+                        sh 'go build -o hello-world main.go'
                 }
             }
+        }
         }
 
         stage('Test') {
             steps {
-                // Run Go tests
-                sh 'go test ./...'
+                 dir('source-repo/') {
+                    // Run Go tests
+                    sh 'go test ./...'
+                 }
+                
             }
         }
 
         stage('Deploy') {
             steps {
-                // This stage is an example and might not apply to this project
-                // It's common to deploy compiled binaries or artifacts to specific locations
-                echo 'Deployment step - Not implemented in this example'
+                dir('source-repo/') {
+                    // This stage is an example and might not apply to this project
+                    // It's common to deploy compiled binaries or artifacts to specific locations
+                    echo 'Deployment step - Not implemented in this example'
+                }
+                
             }
         }
     }
