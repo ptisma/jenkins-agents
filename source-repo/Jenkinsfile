@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    tools { go '1.19' }
+    tools { go '1.21.1' }
 
     stages {
         stage('Checkout') {
