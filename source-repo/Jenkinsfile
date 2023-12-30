@@ -30,24 +30,25 @@ pipeline {
 
         stage('Test') {
             steps {
-                 dir('source-repo/') {
-                    // Run Go tests
-                    sh 'go test ./...'
-                 }
-                
-            }
-        }
-
-        stage('Deploy') {
-            steps {
                 dir('source-repo/') {
-                    // This stage is an example and might not apply to this project
-                    // It's common to deploy compiled binaries or artifacts to specific locations
-                    echo 'Deployment step - Not implemented in this example'
+                // Run Go tests
+                sh 'go test ./...'
                 }
                 
             }
         }
+
+        stage('DockerBuild') {
+            steps {
+                dir('source-repo/') {
+                // Run Go tests
+                sh 'docker --version'
+                }
+                
+            }
+        }
+
+
     }
 
     post {
