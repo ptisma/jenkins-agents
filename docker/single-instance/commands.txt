@@ -26,3 +26,5 @@ cat /var/jenkins_home/secrets/initialAdminPassword
 Setup Jenkins after initial login using password
 44d97ae789b64f95a7822795734b4269
 
+Setup Credentials: DOCKER_USERNAME, DOCKER_PASSWORD
+

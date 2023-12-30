@@ -41,11 +41,43 @@ pipeline {
             }
         }
 
+        stage('Retrieve Commit Tag') {
+            steps {
+                script {
+                    // Retrieve the commit tag
+                    def commitHash = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
+                    
+                    // Set the commit tag as an environment variable for later use
+                    env.TAG = commitHash
+                }
+            }
+        }
+
+        stage('DockerLogin') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'DOCKER-CREDS', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    // Log in to Docker registry
+                    sh "echo $DOCKER_USERNAME/$DOCKER_PASSWORD"
+                    sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+                }
+            }
+        }
+
         stage('DockerBuild') {
             steps {
                 dir('source-repo/') {
-                // Run Go tests
-                sh 'docker --version'
+                    script {
+                        sh "docker build -t ptisma/hello-world-jenkins:${env.TAG} ."
+                }
+            }
+            
+            }
+        }
+
+        stage('DockerPush') {
+            steps {
+                dir('source-repo/') {
+                    sh "docker push ptisma/hello-world-jenkins:${env.TAG}"
                 }
                 
             }
