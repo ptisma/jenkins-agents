@@ -3,7 +3,7 @@ pipeline {
 
     tools { 
         go '1.21.1'
-        dockerTool 'docker'
+        'org.jenkinsci.plugins.docker.commons.tools.DockerTool' '18.09'
     }
     
 
