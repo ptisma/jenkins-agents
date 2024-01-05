@@ -14,10 +14,13 @@ docker run -d --rm --name=agent1 --network jenkins -p 22:22 \
 -e "JENKINS_AGENT_SSH_PUBKEY=[your-public-key]" \
 jenkins/ssh-agent:alpine-jdk17
 
+Specific example:
+docker run -d --rm --name=agent1 --network jenkins -p 22:22 -e "JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDg32MF5bsXDeK5B6QcS4rM5fFxD5JxtTgU2/nk4X5ZXYcuZU4NqVRJiMIHqh+fnCfMWYLBkuC1C9ksIQjCgTj7C3RaqYuRiFIOC/4lOnRtE4R1LemnwwuxHcdUOVoODV0iVeKI9pUsfEkJHS5vmO/BHOa9RnANnz8NGeVupphJPfyhsb2+aHsZut1LDqEdP/e6lSTG5DJ2zCDUG4gqd2yCxPeTEHWPFpYHAyY234pc+YCBLuofuXuQLwZYK9zQyq+wldi1dpev8Pdah8mhnnlDqWfA5ZO6bpZI8vQE+ZyxHhFoLyimKbdqCBa6lAov5Z7AwlxRQcPYm7azBi06ptcBYc8tpVywdWYKUJ7cNzvxQD0RWfFjx07lECtSefsYVveSImUE5ckfJOA1VY/IsJGjrHGGL1RvNTv9I9Bio5z2kmzP74o3JiVDzkfSCQGzLD9k6nvha9Qb23uu3kXeEnbdnfFS4y4OpMKayhfQ2i9ZfxxHMGOtsuII+fvEV1T5fg0= ptisma@LENPF3XNVRK" \
+jenkins/ssh-agent:alpine-jdk17
 
 Public key can be found by cating the  ~/.ssh/jenkins_agent_key.pub
 
-
+Specific xxample:
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDg32MF5bsXDeK5B6QcS4rM5fFxD5JxtTgU2/nk4X5ZXYcuZU4NqVRJiMIHqh+fnCfMWYLBkuC1C9ksIQjCgTj7C3RaqYuRiFIOC/4lOnRtE4R1LemnwwuxHcdUOVoODV0iVeKI9pUsfEkJHS5vmO/BHOa9RnANnz8NGeVupphJPfyhsb2+aHsZut1LDqEdP/e6lSTG5DJ2zCDUG4gqd2yCxPeTEHWPFpYHAyY234pc+YCBLuofuXuQLwZYK9zQyq+wldi1dpev8Pdah8mhnnlDqWfA5ZO6bpZI8vQE+ZyxHhFoLyimKbdqCBa6lAov5Z7AwlxRQcPYm7azBi06ptcBYc8tpVywdWYKUJ7cNzvxQD0RWfFjx07lECtSefsYVveSImUE5ckfJOA1VY/IsJGjrHGGL1RvNTv9I9Bio5z2kmzP74o3JiVDzkfSCQGzLD9k6nvha9Qb23uu3kXeEnbdnfFS4y4OpMKayhfQ2i9ZfxxHMGOtsuII+fvEV1T5fg0= ptisma@LENPF3XNVRK
 
 Setup Jenkins agent:
@@ -32,6 +35,12 @@ Launch method: Launch agents by SSH
 Host: host.docker.internal
 Credentials: jenkins
 Host Key verification Strategy: Manually trusted key verification
+Environment variables:
+DOCKER_HOST=tcp://docker:2376 \
+DOCKER_CERT_PATH=/certs/client
+DOCKER_TLS_VERIFY=1 \
+
+Env variables are important because the build will fail, it won't be able to connect to docker daemon, the jenkins user which is run on the agent can't see the env variables which are set during docker run, so we have to set them during the Node setup
 
 
 
