@@ -1,4 +1,4 @@
-"Configure Clouds" refers to setting up cloud-based agents or dynamic provisioning of resources. 
+##"Configure Clouds" refers to setting up cloud-based agents or dynamic provisioning of resources. 
 Jenkins supports various cloud providers (like AWS, Azure, Google Cloud, etc.) or virtualization solutions (such as Docker, Kubernetes, OpenStack, etc.) to dynamically create and manage Jenkins agents based on demand. 
 This feature enables Jenkins to automatically provision agents in the cloud or virtual environments when there's a workload, and then remove them when the workload decreases. 
 You can define cloud configurations, specifying the cloud provider details, templates for agents, and other settings for dynamic agent provisioning.
@@ -35,7 +35,4 @@ Server credentials: docker-tls (one we created in previous step)
 Keep in mind, restarting the docker-in-docker will change the certiifates.
 
 
-
-
-docker build -t dind-custom:latest .
   
