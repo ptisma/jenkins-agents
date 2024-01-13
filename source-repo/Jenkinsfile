@@ -54,6 +54,17 @@ pipeline {
             }
         }
 
+        stage('DockerTest') {
+            steps {
+                dir('source-repo/') {
+                    script {
+                        sh "docker --version"
+                }
+            }
+            
+            }
+        }
+
         stage('DockerLogin') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'DOCKER-CREDS', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {

@@ -1,0 +1,16 @@
+1. setup minikube with 1 node
+
+2. setup jenkins controller on minikube
+
+3. setup jenkins with static node and cloud using helm config 
+
+
+
+
+
+
+So far it works but the agents do not have access to the docker, add dind as sidecar to every agent pod
+
+
+
+everything again but on minikube with multiple nodes and custom non static volumes?
