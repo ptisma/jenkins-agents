@@ -29,6 +29,9 @@ echo http://$NODE_IP:$NODE_PORT/login
 
 
 
+Kad navedem instalaciju docker commons plugin aobavezno staviit verizju
+
+
 
 
 
