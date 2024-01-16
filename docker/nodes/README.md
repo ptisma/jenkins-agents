@@ -1,5 +1,6 @@
 Prerequisite:
 The Jenkins controller has already been setup (see /docker/single-instance)
+
 Add a new Node:
 This option allows you to add a new individual Jenkins agent (or node) to your Jenkins environment. A node in Jenkins represents a machine (physical or virtual) that can execute tasks as part of your Jenkins jobs or pipelines. Adding a new node involves defining the details of a single machine that Jenkins can use to offload work from the master Jenkins instance. You can specify the node's name, labels, connection details (such as its IP address, credentials, or connection method), and other configurations specific to that node.
 
