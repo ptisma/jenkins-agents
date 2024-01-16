@@ -732,8 +732,12 @@ agent:
   #
   # Pod-wide environment, these vars are visible to any container in the agent pod
   envVars: 
-  - name: DOCKER_HOST
-    value: tcp://dind:2375
+  - name: DOCKER_HOST 
+    value: tcp://localhost:2375
+  - name: DOCKER_TLS_CERTDIR
+    value: ""
+  - name: DOCKER_TLS_VERIFY
+    value: ""
   # Mount a secret as environment variable
   secretEnvVars: []
   # - key: PATH
@@ -783,7 +787,7 @@ agent:
    - sideContainerName: dind
      image: docker
      tag: dind
-     command: dockerd-entrypoint.sh
+     command: ""
      args: ""
      privileged: true
      resources:

@@ -34,5 +34,7 @@ Server credentials: docker-tls (one we created in previous step)
 
 Keep in mind, restarting the docker-in-docker will change the certiifates.
 
+What about the volumes for docket sockets?
+
 
   
